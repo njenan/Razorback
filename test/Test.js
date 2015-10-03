@@ -101,8 +101,6 @@ describe('Object Normalizer/Denormalizer', function () {
 
             var actual = normalizer.normalize(obj);
 
-            console.log(actual);
-
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b.c, actual.b.c);
             assert.equal(expected.b.d, actual.b.d);
@@ -111,7 +109,7 @@ describe('Object Normalizer/Denormalizer', function () {
         it('should transform a flat object into a 4 level object', function () {
             var obj = {
                 a_b: 'zeroth',
-                a_b_c_e: 'first',
+                a_c_e: 'first',
                 d: 'second'
             };
 
@@ -127,11 +125,13 @@ describe('Object Normalizer/Denormalizer', function () {
 
             var actual = normalizer.normalize(obj);
 
+            console.log('actual', actual);
+            console.log('expected', expected);
+
             assert.equal(expected.a.b, actual.a.b);
-            assert.equal(expected.a.b.c.e, actual.a.b.c.e);
+            assert.equal(expected.a.c.e, actual.a.c.e);
             assert.equal(expected.d, actual.d);
         });
-
 
     });
 

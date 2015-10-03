@@ -10,23 +10,18 @@ function enflatten(source, out, path) {
     }
 }
 
-function unflatten(source, out) {
-    for (var k in source) {
-        var split = k.split(seperator);
+function unflatten(value, out, path) {
+    var current = path.shift();
 
-        if (split.length > 1) {
-            var collector = out[split[0]] == undefined ? out[split[0]] = {} :
-                out[split[0]];
-
-
-            for (var i = 1; i < split.length; i++) {
-                collector[split[i]] = source[k];
-            }
-
+    if (out[current] === undefined) {
+        if (path.length === 0) {
+            out[current] = value;
         } else {
-            out[k] = source[k];
+            out[current] = {};
+            unflatten(value, out[current], path);
         }
-
+    } else {
+        unflatten(value, out[current], path);
     }
 }
 
@@ -39,7 +34,17 @@ module.exports = {
     },
     normalize: function (obj) {
         var out = {};
-        unflatten(obj, out);
+
+        for (var k in obj) {
+            var split = k.split(seperator);
+
+            if (split.length > 1) {
+                unflatten(obj[k], out, split);
+            } else {
+                out[k] = obj[k];
+            }
+        }
+
         return out;
     }
 };
