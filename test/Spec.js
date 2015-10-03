@@ -125,9 +125,6 @@ describe('Object Normalizer/Denormalizer', function () {
 
             var actual = normalizer.normalize(obj);
 
-            console.log('actual', actual);
-            console.log('expected', expected);
-
             assert.equal(expected.a.b, actual.a.b);
             assert.equal(expected.a.c.e, actual.a.c.e);
             assert.equal(expected.d, actual.d);

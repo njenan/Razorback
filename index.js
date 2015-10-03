@@ -37,12 +37,7 @@ module.exports = {
 
         for (var k in obj) {
             var split = k.split(seperator);
-
-            if (split.length > 1) {
-                unflatten(obj[k], out, split);
-            } else {
-                out[k] = obj[k];
-            }
+            unflatten(obj[k], out, split);
         }
 
         return out;
