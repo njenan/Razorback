@@ -10,7 +10,7 @@ describe('Object Normalizer/Denormalizer', function () {
             var obj = {
                 a: 'first',
                 b: 'second'
-            }
+            };
 
             var actual = normalizer.denormalize(obj);
 
@@ -69,6 +69,42 @@ describe('Object Normalizer/Denormalizer', function () {
             assert.equal(expected.b_c2_d1_e1, actual.b_c2_d1_e1);
             assert.equal(expected.b_c3, actual.b_c3);
         });
+
+        it('should turn an object with an array into an array of flat objects',
+            function () {
+                var obj = {
+                    a: 'first',
+                    b: [
+                        '1',
+                        '2',
+                        '3'
+                    ]
+                };
+
+                var expected = [
+                    {
+                        a: 'first',
+                        b: '1'
+                    },
+                    {
+                        a: 'first',
+                        b: '2'
+                    },
+                    {
+                        a: 'first',
+                        b: '3'
+                    }
+                ];
+
+                var actual = normalizer.denormalize(obj);
+
+                assert.equal(expected[0].a, actual[0].a);
+                assert.equal(expected[0].b, actual[0].b);
+                assert.equal(expected[1].a, actual[1].a);
+                assert.equal(expected[1].b, actual[1].b);
+                assert.equal(expected[2].a, actual[2].a);
+                assert.equal(expected[2].b, actual[2].b);
+            });
     });
 
     describe('normalize', function () {
@@ -110,6 +146,7 @@ describe('Object Normalizer/Denormalizer', function () {
             var obj = {
                 a_b: 'zeroth',
                 a_c_e: 'first',
+                a_c_f_g: 'first and a half',
                 d: 'second'
             };
 
@@ -117,7 +154,10 @@ describe('Object Normalizer/Denormalizer', function () {
                 a: {
                     b: 'zeroth',
                     c: {
-                        e: 'first'
+                        e: 'first',
+                        f: {
+                            g: 'first and a half'
+                        }
                     }
                 },
                 d: 'second'
@@ -127,6 +167,7 @@ describe('Object Normalizer/Denormalizer', function () {
 
             assert.equal(expected.a.b, actual.a.b);
             assert.equal(expected.a.c.e, actual.a.c.e);
+            assert.equal(expected.a.c.f.g, actual.a.c.f.g);
             assert.equal(expected.d, actual.d);
         });
 
