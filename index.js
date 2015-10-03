@@ -1,11 +1,11 @@
 var seperator = '_';
 
-function enflatten(source, out, path) {
+function flatten(source, out, path) {
     for (var k in source) {
         if (typeof source[k] !== 'object') {
             out[path === '' ? k : path + seperator + k] = source[k];
         } else {
-            enflatten(source[k], out, path === '' ? k : path + seperator + k);
+            flatten(source[k], out, path === '' ? k : path + seperator + k);
         }
     }
 }
@@ -29,7 +29,7 @@ function unflatten(value, out, path) {
 module.exports = {
     denormalize: function (obj) {
         var out = {}
-        enflatten(obj, out, '');
+        flatten(obj, out, '');
         return out;
     },
     normalize: function (obj) {
