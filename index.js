@@ -30,9 +30,9 @@
 
     module.exports = {
         denormalize: function (obj) {
-            var out = {};
-            flatten(obj, out, '');
-            return out;
+            var out = [{}];
+            flatten(obj, out[0], '');
+            return out;å
         },
         normalize: function (obj) {
             var out = {};

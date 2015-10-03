@@ -12,7 +12,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b: 'second'
             };
 
-            var actual = normalizer.denormalize(obj);
+            var actual = normalizer.denormalize(obj)[0];
 
             assert.equal(obj.a, actual.a);
             assert.equal(obj.b, actual.b);
@@ -33,7 +33,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_c2: 'third'
             };
 
-            var actual = normalizer.denormalize(obj);
+            var actual = normalizer.denormalize(obj)[0];
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_c1, actual.b_c1);
@@ -62,7 +62,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_c3: 'fourth'
             };
 
-            var actual = normalizer.denormalize(obj);
+            var actual = normalizer.denormalize(obj)[0];
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_c1, actual.b_c1);
@@ -96,7 +96,7 @@ describe('Object Normalizer/Denormalizer', function () {
                     }
                 ];
 
-                var actual = normalizer.denormalize(obj);
+                var actual = normalizer.denormalize(obj)[0];
 
                 assert.equal(expected[0].a, actual[0].a);
                 assert.equal(expected[0].b, actual[0].b);
