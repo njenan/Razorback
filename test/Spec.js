@@ -170,7 +170,5 @@ describe('Object Normalizer/Denormalizer', function () {
             assert.equal(expected.a.c.f.g, actual.a.c.f.g);
             assert.equal(expected.d, actual.d);
         });
-
     });
-
 });
