@@ -12,7 +12,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b: 'second'
             };
 
-            var actual = normalizer.denormalize(obj)[0];
+            var actual = normalizer.denormalize(obj);
 
             assert.equal(obj.a, actual.a);
             assert.equal(obj.b, actual.b);
@@ -33,7 +33,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_c2: 'third'
             };
 
-            var actual = normalizer.denormalize(obj)[0];
+            var actual = normalizer.denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_c1, actual.b_c1);
@@ -62,7 +62,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_c3: 'fourth'
             };
 
-            var actual = normalizer.denormalize(obj)[0];
+            var actual = normalizer.denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_c1, actual.b_c1);
@@ -81,30 +81,52 @@ describe('Object Normalizer/Denormalizer', function () {
                     ]
                 };
 
-                var expected = [
-                    {
-                        a: 'first',
-                        b: '1'
-                    },
-                    {
-                        a: 'first',
-                        b: '2'
-                    },
-                    {
-                        a: 'first',
-                        b: '3'
-                    }
-                ];
+                var expected = {
+                    a: 'first',
+                    b_0: '1',
+                    b_1: '2',
+                    b_2: '3'
+                };
 
-                var actual = normalizer.denormalize(obj)[0];
+                var actual = normalizer.denormalize(obj);
 
-                assert.equal(expected[0].a, actual[0].a);
-                assert.equal(expected[0].b, actual[0].b);
-                assert.equal(expected[1].a, actual[1].a);
-                assert.equal(expected[1].b, actual[1].b);
-                assert.equal(expected[2].a, actual[2].a);
-                assert.equal(expected[2].b, actual[2].b);
+                assert.equal(expected.a, actual.a);
+                assert.equal(expected.b_0, actual.b_0);
+                assert.equal(expected.b_1, actual.b_1);
+                assert.equal(expected.b_2, actual.b_2);
             });
+
+        it('should flatten the objects within arrays', function () {
+            var obj = {
+                a: 'first',
+                b: [
+                    {
+                        c: 'second',
+                        d: 'third'
+                    },
+                    {
+                        c: 'fourth',
+                        d: 'fifth'
+                    }
+                ]
+            };
+
+            var expected = {
+                a: 'first',
+                b_0_c: 'second',
+                b_0_d: 'third',
+                b_1_c: 'fourth',
+                b_1_d: 'fifth'
+            };
+
+            var actual = normalizer.denormalize(obj);
+
+            assert.equal(expected.a, actual.a);
+            assert.equal(expected.b_0_c, actual.b_0_c);
+            assert.equal(expected.b_0_d, actual.b_0_d);
+            assert.equal(expected.b_1_c, actual.b_1_c);
+            assert.equal(expected.b_1_d, actual.b_1_d);
+        });
 
     });
 

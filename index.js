@@ -1,4 +1,7 @@
 (function () {
+    var seperator = '_';
+
+
     function constructCurrentPath(path, seperator, k, source) {
         var currentPath;
 
@@ -23,15 +26,17 @@
         var value;
 
         if (source[k].isArray) {
-            value = source[k].shift();
+            var out = source[k].shift();
+
+            //unflatten(out);
+
+            value = out;
         } else {
             value = source[k];
         }
 
         return value;
     }
-
-    var seperator = '_';
 
     function flatten(source, out, fullPath) {
         for (var k in source) {
@@ -79,8 +84,8 @@
 
     module.exports = {
         denormalize: function (obj) {
-            var out = [{}];
-            flatten(obj, out[0], '');
+            var out = {};
+            flatten(obj, out, '');
             return out;
         },
         normalize: function (obj) {
