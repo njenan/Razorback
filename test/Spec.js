@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var normalizer = require('../index');
+var Norm = require('../index');
 
 
 describe('Object Normalizer/Denormalizer', function () {
@@ -12,7 +12,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b: 'second'
             };
 
-            var actual = normalizer.denormalize(obj);
+            var actual = new Norm().denormalize(obj);
 
             assert.equal(obj.a, actual.a);
             assert.equal(obj.b, actual.b);
@@ -33,7 +33,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_c2: 'third'
             };
 
-            var actual = normalizer.denormalize(obj);
+            var actual = new Norm().denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_c1, actual.b_c1);
@@ -62,7 +62,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_c3: 'fourth'
             };
 
-            var actual = normalizer.denormalize(obj);
+            var actual = new Norm().denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_c1, actual.b_c1);
@@ -88,7 +88,7 @@ describe('Object Normalizer/Denormalizer', function () {
                     b_2: '3'
                 };
 
-                var actual = normalizer.denormalize(obj);
+                var actual = new Norm().denormalize(obj);
 
                 assert.equal(expected.a, actual.a);
                 assert.equal(expected.b_0, actual.b_0);
@@ -119,13 +119,74 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_1_d: 'fifth'
             };
 
-            var actual = normalizer.denormalize(obj);
+            var actual = new Norm().denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_0_c, actual.b_0_c);
             assert.equal(expected.b_0_d, actual.b_0_d);
             assert.equal(expected.b_1_c, actual.b_1_c);
             assert.equal(expected.b_1_d, actual.b_1_d);
+        });
+
+
+        it('should flatten the objects within arrays within arrays',
+            function () {
+                var obj = {
+                    a: 'first',
+                    b: [
+                        {
+                            c: 'second',
+                            d: [
+                                'third',
+                                'fourth'
+                            ]
+                        },
+                        {
+                            c: 'fifth',
+                            d: [
+                                'sixth',
+                                'seventh'
+                            ]
+                        }
+                    ]
+                };
+
+                var expected = {
+                    a: 'first',
+                    b_0_c: 'second',
+                    b_0_d_0: 'third',
+                    b_0_d_1: 'fourth',
+                    b_1_c: 'fifth',
+                    b_1_d_0: 'sixth',
+                    b_1_d_1: 'seventh'
+                };
+
+                var actual = new Norm().denormalize(obj);
+
+                assert.equal(expected.a, actual.a);
+                assert.equal(expected.b_0_c, actual.b_0_c);
+                assert.equal(expected.b_0_d_0, actual.b_0_d_0);
+                assert.equal(expected.b_0_d_1, actual.b_0_d_1);
+                assert.equal(expected.b_1_c, actual.b_1_c);
+                assert.equal(expected.b_1_d_0, actual.b_1_d_0);
+                assert.equal(expected.b_1_d_1, actual.b_1_d_1);
+            });
+
+
+        it('should allow custom seperators', function () {
+            var obj = {
+                a: {
+                    b: 'first'
+                }
+            };
+
+            var expected = {
+                'a&b': 'first'
+            };
+
+            var actual = new Norm({seperator: '&'}).denormalize(obj);
+
+            assert.equal(expected['a&b'], actual['a&b']);
         });
 
     });
@@ -137,7 +198,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b: 'second'
             };
 
-            var actual = normalizer.normalize(obj);
+            var actual = new Norm().normalize(obj);
 
             assert.equal(obj.a, actual.a);
             assert.equal(obj.b, actual.b);
@@ -158,7 +219,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 }
             };
 
-            var actual = normalizer.normalize(obj);
+            var actual = new Norm().normalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b.c, actual.b.c);
@@ -187,7 +248,7 @@ describe('Object Normalizer/Denormalizer', function () {
             };
 
 
-            var actual = normalizer.normalize(obj);
+            var actual = new Norm().normalize(obj);
 
             assert.equal(expected.a.b, actual.a.b);
             assert.equal(expected.a.c.e, actual.a.c.e);

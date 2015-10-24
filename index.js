@@ -2,6 +2,14 @@
     var seperator = '_';
 
 
+    var Norm = function (params) {
+        if (!params) {
+            params = {}
+        }
+
+        seperator = params.seperator ? params.seperator : '_';
+    }
+
     function constructCurrentPath(path, seperator, k, source) {
         var currentPath;
 
@@ -26,11 +34,7 @@
         var value;
 
         if (source[k].isArray) {
-            var out = source[k].shift();
-
-            //unflatten(out);
-
-            value = out;
+            value = source[k].shift();
         } else {
             value = source[k];
         }
@@ -51,7 +55,6 @@
             }
         }
     }
-
 
     function unflatten(out) {
         var obj = {};
@@ -81,15 +84,15 @@
         return obj;
     }
 
-
-    module.exports = {
-        denormalize: function (obj) {
-            var out = {};
-            flatten(obj, out, '');
-            return out;
-        },
-        normalize: function (obj) {
-            return unflatten(obj);
-        }
+    Norm.prototype.denormalize = function (obj) {
+        var out = {};
+        flatten(obj, out, '');
+        return out;
     };
+    Norm.prototype.normalize = function (obj) {
+        return unflatten(obj);
+    };
+
+    module.exports = Norm;
+
 }());
