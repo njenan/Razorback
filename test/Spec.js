@@ -105,6 +105,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 assert.equal(expected[2].a, actual[2].a);
                 assert.equal(expected[2].b, actual[2].b);
             });
+
     });
 
     describe('normalize', function () {
@@ -162,6 +163,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 },
                 d: 'second'
             };
+
 
             var actual = normalizer.normalize(obj);
 

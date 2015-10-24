@@ -1,30 +1,79 @@
 (function () {
+    function constructCurrentPath(path, seperator, k, source) {
+        var currentPath;
+
+        if (path === '') {
+            if (source[k].isArray) {
+                currentPath = path;
+            } else {
+                currentPath = k;
+            }
+        } else {
+            if (source[k].isArray) {
+                currentPath = path;
+            } else {
+                currentPath = path + seperator + k;
+            }
+        }
+
+        return currentPath;
+    }
+
+    function extractValue(source, k) {
+        var value;
+
+        if (source[k].isArray) {
+            value = source[k].shift();
+        } else {
+            value = source[k];
+        }
+
+        return value;
+    }
 
     var seperator = '_';
 
-    function flatten(source, out, path) {
+    function flatten(source, out, fullPath) {
         for (var k in source) {
             if (typeof source[k] !== 'object') {
-                out[path === '' ? k : path + seperator + k] = source[k];
+                var value = extractValue(source, k);
+                var path = constructCurrentPath(fullPath, seperator, k, source);
+
+                out[path] = value;
             } else {
-                flatten(source[k], out, path === '' ? k : path + seperator + k);
+                var path = constructCurrentPath(fullPath, seperator, k, source);
+                flatten(source[k], out, path);
             }
         }
     }
 
-    function unflatten(value, out, path) {
-        var current = path.shift();
 
-        if (out[current] === undefined) {
-            if (path.length === 0) {
-                out[current] = value;
+    function unflatten(out) {
+        var obj = {};
+
+        for (var k in out) {
+            var split = k.split(seperator);
+
+            if (split.length > 1) {
+                var current = obj;
+                for (var i = 1; i < split.length; i++) {
+                    current[split[i - 1]] =
+                        current[split[i - 1]] ? current[split[i - 1]] : {};
+
+                    if (i + 1 === split.length) {
+                        current[split[i - 1]][split[i]] = out[k]
+                    } else {
+                        current = current[split[i - 1]];
+                    }
+                }
             } else {
-                out[current] = {};
-                unflatten(value, out[current], path);
+                obj[k] = out[k];
             }
-        } else {
-            unflatten(value, out[current], path);
+
+
         }
+
+        return obj;
     }
 
 
@@ -32,17 +81,10 @@
         denormalize: function (obj) {
             var out = [{}];
             flatten(obj, out[0], '');
-            return out;å
+            return out;
         },
         normalize: function (obj) {
-            var out = {};
-
-            for (var k in obj) {
-                var split = k.split(seperator);
-                unflatten(obj[k], out, split);
-            }
-
-            return out;
+            return unflatten(obj);
         }
     };
-})();
+}());
