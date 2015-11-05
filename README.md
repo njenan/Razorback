@@ -44,3 +44,25 @@ Currently, only fixed index arrays (those that always have a set number of items
 	//	b_1: 'third'
 	//}
 	
+
+Custom seperators can be used instead of the default underscore '_' character if this conflicts with existing field names on objects.
+
+	var norm = new Norm({
+		seperator : '&'
+		});
+		
+	norm.denormalize({
+		a: 'first',
+		b: {
+			c: 'second',
+			d: 'third'
+		}
+	});
+	
+	//produces:
+	//
+	//{
+	//	a: 'first',
+	//	b&c: 'second',
+	//	b&d: 'third'
+	//}
