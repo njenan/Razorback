@@ -65,8 +65,16 @@
             if (split.length > 1) {
                 var current = obj;
                 for (var i = 1; i < split.length; i++) {
+                    var newObj;
+
+                    if (!isNaN(split[i])) {
+                        newObj = [];
+                    } else {
+                        newObj = {};
+                    }
+
                     current[split[i - 1]] =
-                        current[split[i - 1]] ? current[split[i - 1]] : {};
+                        current[split[i - 1]] ? current[split[i - 1]] : newObj;
 
                     if (i + 1 === split.length) {
                         current[split[i - 1]][split[i]] = out[k]

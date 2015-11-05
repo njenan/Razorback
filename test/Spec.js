@@ -255,5 +255,32 @@ describe('Object Normalizer/Denormalizer', function () {
             assert.equal(expected.a.c.f.g, actual.a.c.f.g);
             assert.equal(expected.d, actual.d);
         });
+
+        it('should transform index objects back into arrays', function () {
+            var obj = {
+                a: 'first',
+                b_0: 'second',
+                b_1: 'third'
+            };
+
+
+            var expected = {
+                a: 'first',
+                b: [
+                    'second',
+                    'third'
+                ]
+            };
+
+            var actual = new Norm().normalize(obj);
+
+            console.log(actual);
+
+            assert.equal(expected.a, actual.a);
+            assert.equal(expected.b[0], actual.b[0]);
+            assert.equal(expected.b[1], actual.b[1]);
+            assert.equal(true, expected.b.constructor === Array);
+            assert.equal(true, actual.b.constructor === Array);
+        });
     });
 });
