@@ -274,13 +274,59 @@ describe('Object Normalizer/Denormalizer', function () {
 
             var actual = new Norm().normalize(obj);
 
-            console.log(actual);
-
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b[0], actual.b[0]);
             assert.equal(expected.b[1], actual.b[1]);
             assert.equal(true, expected.b.constructor === Array);
             assert.equal(true, actual.b.constructor === Array);
+        });
+    });
+
+    describe('custom mappings', function () {
+        it('should allow custom mappings to flat objects', function () {
+            var obj = {
+                a: {
+                    b: 'first'
+                }
+            };
+
+            var expected = {
+                custom: 'first'
+            };
+
+            var actual = new Norm({
+                mappings: [
+                    {
+                        from: 'a_b',
+                        to: 'custom'
+                    }
+                ]
+            }).denormalize(obj);
+
+            assert.equal(expected['custom'], actual['custom']);
+        });
+
+        it('should allow custom mappings to normalized objects', function () {
+            var expected = {
+                a: {
+                    b: 'first'
+                }
+            };
+
+            var obj = {
+                custom: 'first'
+            };
+
+            var actual = new Norm({
+                mappings: [
+                    {
+                        from: 'a_b',
+                        to: 'custom'
+                    }
+                ]
+            }).normalize(obj);
+
+            assert.equal(expected.a.b, actual.a.b);
         });
     });
 });

@@ -1,14 +1,5 @@
 (function () {
-    var seperator = '_';
 
-
-    var Norm = function (params) {
-        if (!params) {
-            params = {}
-        }
-
-        seperator = params.seperator ? params.seperator : '_';
-    }
 
     function constructCurrentPath(path, seperator, k, source) {
         var currentPath;
@@ -46,11 +37,13 @@
         for (var k in source) {
             if (typeof source[k] !== 'object') {
                 var value = extractValue(source, k);
-                var path = constructCurrentPath(fullPath, seperator, k, source);
+                var path = constructCurrentPath(fullPath, seperator, k,
+                    source);
 
                 out[path] = value;
             } else {
-                var path = constructCurrentPath(fullPath, seperator, k, source);
+                var path = constructCurrentPath(fullPath, seperator, k,
+                    source);
                 flatten(source[k], out, path);
             }
         }
@@ -74,7 +67,8 @@
                     }
 
                     current[split[i - 1]] =
-                        current[split[i - 1]] ? current[split[i - 1]] : newObj;
+                        current[split[i - 1]] ? current[split[i - 1]] :
+                            newObj;
 
                     if (i + 1 === split.length) {
                         current[split[i - 1]][split[i]] = out[k]
@@ -92,12 +86,46 @@
         return obj;
     }
 
+    function applyCustomMappingsToFlatObject(obj, mappings) {
+        for (var k in obj) {
+            if (mappings[k]) {
+                var temp = obj[k];
+                delete obj[k];
+                obj[mappings[k]] = temp;
+            }
+        }
+    }
+
+
+    var seperator = '_';
+    var defaultToCustomMappings = {};
+    var customToDefaultMappings = {};
+
+    var Norm = function (params) {
+        if (!params) {
+            params = {}
+        }
+
+        if (params.mappings) {
+            for (var i = 0; i < params.mappings.length; i++) {
+                defaultToCustomMappings[params.mappings[i].from] =
+                    params.mappings[i].to;
+                customToDefaultMappings[params.mappings[i].to] =
+                    params.mappings[i].from;
+            }
+        }
+
+        seperator = params.seperator ? params.seperator : '_';
+    };
+
     Norm.prototype.denormalize = function (obj) {
         var out = {};
         flatten(obj, out, '');
+        applyCustomMappingsToFlatObject(out, defaultToCustomMappings);
         return out;
     };
     Norm.prototype.normalize = function (obj) {
+        applyCustomMappingsToFlatObject(obj, customToDefaultMappings);
         return unflatten(obj);
     };
 

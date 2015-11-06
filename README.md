@@ -66,3 +66,27 @@ Custom seperators can be used instead of the default underscore '_' character if
 	//	b&c: 'second',
 	//	b&d: 'third'
 	//}
+	
+	
+Custom mappings between the default (ugly) fields that norm generates can also be provided.
+
+	var norm = new Norm({
+		mappings: [
+			{
+				from: 'a_b',
+				to: 'customField'
+			}
+		]
+	});
+	
+	norm.denormalize({
+		a: {
+			b: 'first'
+		}
+	});
+	
+	//produces:
+	//
+	//{
+	//	customField: 'first'
+	//}
