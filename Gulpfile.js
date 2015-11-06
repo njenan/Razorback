@@ -10,13 +10,21 @@ gulp.task('coverage', function () {
         .pipe(gulp.dest('coverage'));
 });
 
-gulp.task('test', ['coverage'], function () {
+gulp.task('test_with_coverage', ['coverage'], function () {
     gulp.src('test/**/*.js')
         .pipe(mocha())
         .on('error', function (err) {
             console.log(err);
         })
         .pipe(istanbul.writeReports());
+});
+
+gulp.task('test', function () {
+    gulp.src('test/**/*.js')
+        .pipe(mocha())
+        .on('error', function (err) {
+            console.log(err);
+        });
 });
 
 gulp.task('develop', function () {
