@@ -329,4 +329,151 @@ describe('Object Normalizer/Denormalizer', function () {
             assert.equal(expected.a.b, actual.a.b);
         });
     });
+
+    describe('advanced array mappings', function () {
+
+        it('should map objects with arrays to arrays of flat objects',
+            function () {
+                var expected = [
+                    {
+                        a: 'first',
+                        b: 'array1'
+                    },
+                    {
+                        a: 'first',
+                        b: 'array2'
+                    },
+                    {
+                        a: 'first',
+                        b: 'array3'
+                    }
+                ];
+
+                var actual = new Norm({
+                    useDynamicArrays: true
+                }).denormalize({
+                        a: 'first',
+                        b: [
+                            'array1',
+                            'array2',
+                            'array3'
+                        ]
+                    });
+
+                assert.equal(expected[0].a, actual[0].a);
+                assert.equal(expected[0].b, actual[0].b);
+                assert.equal(expected[1].a, actual[1].a);
+                assert.equal(expected[1].b, actual[1].b);
+                assert.equal(expected[2].a, actual[2].a);
+                assert.equal(expected[2].b, actual[2].b);
+            });
+
+        it('should map arrays of flat objects to normalized objects',
+            function () {
+                var expected = {
+                    a: 'first',
+                    b: [
+                        'array1',
+                        'array2',
+                        'array3'
+                    ]
+                };
+
+                var actual = new Norm({
+                    useDynamicArrays: true
+                }).normalize([
+                        {
+                            a: 'first',
+                            b: 'array1'
+                        },
+                        {
+                            a: 'first',
+                            b: 'array2'
+                        },
+                        {
+                            a: 'first',
+                            b: 'array3'
+                        }
+                    ]);
+
+                assert.equal(expected.a, actual.a);
+                assert.equal(expected.b[0], actual.b[0]);
+                assert.equal(expected.b[1], actual.b[1]);
+                assert.equal(expected.b[2], actual.b[2]);
+            });
+
+        it('should map arrays of flat objects to normalized objects with multiple levels',
+            function () {
+                var expected = {
+                    a: {
+                        b: 'first'
+                    },
+                    c: [
+                        'array1',
+                        'array2',
+                        'array3'
+                    ]
+                };
+
+                var actual = new Norm({
+                    useDynamicArrays: true
+                }).normalize([
+                        {
+                            a_b: 'first',
+                            c: 'array1'
+                        },
+                        {
+                            a_b: 'first',
+                            c: 'array2'
+                        },
+                        {
+                            a_b: 'first',
+                            c: 'array3'
+                        }
+                    ]);
+
+                assert.equal(expected.a.b, actual.a.b);
+                assert.equal(expected.c[0], actual.c[0]);
+                assert.equal(expected.c[1], actual.c[1]);
+                assert.equal(expected.c[2], actual.c[2]);
+            });
+
+
+        it('should map arrays of flat objects to normalized objects with multiple levels',
+            function () {
+                var expected = {
+                    a: {
+                        b: 'first'
+                    },
+                    c: [
+                        'array1',
+                        'array2',
+                        'array3'
+                    ]
+                };
+
+                var actual = new Norm({
+                    useDynamicArrays: true
+                }).normalize([
+                        {
+                            a_b: 'first',
+                            c: 'array1'
+                        },
+                        {
+                            a_b: 'first',
+                            c: 'array2'
+                        },
+                        {
+                            a_b: 'first',
+                            c: 'array3'
+                        }
+                    ]);
+
+                assert.equal(expected.a.b, actual.a.b);
+                assert.equal(expected.c[0], actual.c[0]);
+                assert.equal(expected.c[1], actual.c[1]);
+                assert.equal(expected.c[2], actual.c[2]);
+            });
+
+    });
 });
