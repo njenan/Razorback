@@ -360,6 +360,7 @@ describe('Object Normalizer/Denormalizer', function () {
                         ]
                     });
 
+                assert.equal(3, actual.length);
                 assert.equal(expected[0].a, actual[0].a);
                 assert.equal(expected[0].b, actual[0].b);
                 assert.equal(expected[1].a, actual[1].a);
@@ -367,6 +368,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 assert.equal(expected[2].a, actual[2].a);
                 assert.equal(expected[2].b, actual[2].b);
             });
+
 
         it('should map arrays of flat objects to normalized objects',
             function () {
@@ -396,12 +398,15 @@ describe('Object Normalizer/Denormalizer', function () {
                         }
                     ]);
 
+
+                assert.equal(3, actual.b.length);
                 assert.equal(expected.a, actual.a);
                 assert.equal(expected.b[0], actual.b[0]);
                 assert.equal(expected.b[1], actual.b[1]);
                 assert.equal(expected.b[2], actual.b[2]);
             });
 
+
         it('should map arrays of flat objects to normalized objects with multiple levels',
             function () {
                 var expected = {
@@ -432,6 +437,7 @@ describe('Object Normalizer/Denormalizer', function () {
                         }
                     ]);
 
+                assert.equal(3, actual.c.length);
                 assert.equal(expected.a.b, actual.a.b);
                 assert.equal(expected.c[0], actual.c[0]);
                 assert.equal(expected.c[1], actual.c[1]);
@@ -474,6 +480,71 @@ describe('Object Normalizer/Denormalizer', function () {
                 assert.equal(expected.c[1], actual.c[1]);
                 assert.equal(expected.c[2], actual.c[2]);
             });
+
+
+        it('should denormalize deep objects with multiple arrays', function () {
+            var actual = new Norm({useDynamicArrays: true}).denormalize({
+                a: 'top',
+                b: [
+                    {
+                        c: 'alpha',
+                        d: [
+                            'first',
+                            'second',
+                            'third'
+                        ]
+                    }, {
+                        c: 'beta',
+                        d: [
+                            'fourth',
+                            'fifth',
+                            'sixth'
+                        ]
+                    }
+                ]
+            });
+
+            var expected = [
+                {
+                    a: 'top',
+                    b_c: 'alpha',
+                    b_d: 'first'
+                },
+                {
+                    a: 'top',
+                    b_c: 'alpha',
+                    b_d: 'second'
+                },
+                {
+                    a: 'top',
+                    b_c: 'alpha',
+                    b_d: 'third'
+                },
+                {
+                    a: 'top',
+                    b_c: 'beta',
+                    b_d: 'fourth'
+                },
+                {
+                    a: 'top',
+                    b_c: 'beta',
+                    b_d: 'fifth'
+                },
+                {
+                    a: 'top',
+                    b_c: 'beta',
+                    b_d: 'sixth'
+                }
+            ];
+
+            assert.equal(6, actual.length);
+
+            for (var i = 0; i < expected.length; i++) {
+                assert.equal(expected[i].a, actual[i].a);
+                assert.equal(expected[i].b_c, actual[i].b_c);
+                assert.equal(expected[i].b_d, actual[i].b_d);
+            }
+        });
 
     });
 });
