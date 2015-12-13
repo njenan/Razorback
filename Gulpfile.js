@@ -10,7 +10,7 @@ gulp.task('coverage', function () {
         .pipe(gulp.dest('coverage'));
 });
 
-gulp.task('test_with_coverage', ['coverage'], function () {
+gulp.task('test', ['coverage'], function () {
     gulp.src('test/**/*.js')
         .pipe(mocha())
         .on('error', function (err) {
@@ -19,7 +19,7 @@ gulp.task('test_with_coverage', ['coverage'], function () {
         .pipe(istanbul.writeReports());
 });
 
-gulp.task('test', function () {
+gulp.task('debug_test', function () {
     gulp.src('test/**/*.js')
         .pipe(mocha())
         .on('error', function (err) {
@@ -28,5 +28,5 @@ gulp.task('test', function () {
 });
 
 gulp.task('develop', function () {
-    gulp.watch('**/*.js', ['test']);
+    gulp.watch('**/*.js', ['debug_test']);
 });
