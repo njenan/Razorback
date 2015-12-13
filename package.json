@@ -1,7 +1,7 @@
 {
-  "name": "normalize-denormalize",
-  "version": "1.0.0",
-  "description": "",
+  "name": "dnorm",
+  "version": "0.0.1",
+  "description": "A library for normalization & denormalization of js objects",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "gulp test"
   },
-  "author": "",
+  "author": "Nathan Jenan",
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.0",
