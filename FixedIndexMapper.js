@@ -1,21 +1,22 @@
 (function () {
     var fieldmap = require('./Functions').fieldmap;
 
+
+    function constructCurrentPath(path, seperator, k) {
+        var currentPath;
+
+        if (path === '') {
+            currentPath = k;
+        } else {
+            currentPath = path + seperator + k;
+        }
+
+        return currentPath;
+    }
+
+
     var FixedIndexMapper = function (_seperator) {
         var seperator = _seperator;
-
-
-        function constructCurrentPath(path, seperator, k) {
-            var currentPath;
-
-            if (path === '') {
-                currentPath = k;
-            } else {
-                currentPath = path + seperator + k;
-            }
-
-            return currentPath;
-        }
 
 
         FixedIndexMapper.prototype.flatten = function (source, out, fullPath) {
@@ -69,8 +70,6 @@
 
             return obj;
         }
-
-
     };
 
     module.exports = FixedIndexMapper;
