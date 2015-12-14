@@ -2,6 +2,7 @@
 ### A js library for normalization/denormalization of objects.
 
 [![Build Status](https://travis-ci.org/njenan/Razorback.svg?branch=master)](https://travis-ci.org/njenan/Razorback)
+[![npm version](https://badge.fury.io/js/razorback.svg)](https://badge.fury.io/js/razorback)
 
 Razorback is designed to allow easier denormalization of objects prior to persisting in flat sql tables, as well as normalizing the objects upon retrieval.
 
