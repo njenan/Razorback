@@ -14,7 +14,8 @@ deploy:
     repo: njenan/Razorback
 after_deploy:
 - GIT_URL="https://${USERNAME}:${PASSWORD}@github.org/njenan/razorback.git"
-- echo $GIT_URL
+- git add package.json
+- git commit -m "TRAVIS CI AUTO VERSIONING"
 - git push --repo $GIT_URL
 env:
   global:
