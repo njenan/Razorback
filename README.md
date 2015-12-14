@@ -1,9 +1,9 @@
-# Norm
+# D'Norm
 ### A js library for normalization/denormalization of objects.
 
-Norm is designed to allow easier denormalization of objects prior to persisting in flat sql tables, as well as normalizing the objects upon retrieval.
+D'Norm is designed to allow easier denormalization of objects prior to persisting in flat sql tables, as well as normalizing the objects upon retrieval.
 
-	var norm = new Norm();
+	var dnorm = new DNorm();
 	
 	var obj = {
 		a: 'first',
@@ -12,7 +12,7 @@ Norm is designed to allow easier denormalization of objects prior to persisting 
 		}
 	};
 	
-	norm.denormalize(obj);
+	dnorm.denormalize(obj);
 	
 	//produces:
 	//
@@ -24,7 +24,7 @@ Norm is designed to allow easier denormalization of objects prior to persisting 
 
 Currently, only fixed index arrays (those that always have a set number of items) are supported.
 
-	var norm = new Norm();
+	var dnorm = new DNorm();
 	
 	var obj = {
 		a: 'first',
@@ -34,7 +34,7 @@ Currently, only fixed index arrays (those that always have a set number of items
 		]
 	};
 	
-	norm.denormalize(obj);
+	dnorm.denormalize(obj);
 	
 	//produces:
 	//
@@ -47,11 +47,11 @@ Currently, only fixed index arrays (those that always have a set number of items
 
 Custom seperators can be used instead of the default underscore '_' character if this conflicts with existing field names on objects.
 
-	var norm = new Norm({
+	var dnorm = new DNorm({
 		seperator : '&'
 		});
 		
-	norm.denormalize({
+	dnorm.denormalize({
 		a: 'first',
 		b: {
 			c: 'second',
@@ -70,7 +70,7 @@ Custom seperators can be used instead of the default underscore '_' character if
 	
 Custom mappings between the default (ugly) fields that norm generates can also be provided.
 
-	var norm = new Norm({
+	var dnorm = new DNorm({
 		mappings: [
 			{
 				from: 'a_b',
@@ -79,7 +79,7 @@ Custom mappings between the default (ugly) fields that norm generates can also b
 		]
 	});
 	
-	norm.denormalize({
+	dnorm.denormalize({
 		a: {
 			b: 'first'
 		}

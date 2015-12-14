@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var Norm = require('../index');
+var DNorm = require('../index');
 
 
 describe('Object Normalizer/Denormalizer', function () {
@@ -12,7 +12,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b: 'second'
             };
 
-            var actual = new Norm().denormalize(obj);
+            var actual = new DNorm().denormalize(obj);
 
             assert.equal(obj.a, actual.a);
             assert.equal(obj.b, actual.b);
@@ -33,7 +33,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_c2: 'third'
             };
 
-            var actual = new Norm().denormalize(obj);
+            var actual = new DNorm().denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_c1, actual.b_c1);
@@ -62,7 +62,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_c3: 'fourth'
             };
 
-            var actual = new Norm().denormalize(obj);
+            var actual = new DNorm().denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_c1, actual.b_c1);
@@ -88,7 +88,7 @@ describe('Object Normalizer/Denormalizer', function () {
                     b_2: '3'
                 };
 
-                var actual = new Norm().denormalize(obj);
+                var actual = new DNorm().denormalize(obj);
 
                 assert.equal(expected.a, actual.a);
                 assert.equal(expected.b_0, actual.b_0);
@@ -119,7 +119,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_1_d: 'fifth'
             };
 
-            var actual = new Norm().denormalize(obj);
+            var actual = new DNorm().denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_0_c, actual.b_0_c);
@@ -161,7 +161,7 @@ describe('Object Normalizer/Denormalizer', function () {
                     b_1_d_1: 'seventh'
                 };
 
-                var actual = new Norm().denormalize(obj);
+                var actual = new DNorm().denormalize(obj);
 
                 assert.equal(expected.a, actual.a);
                 assert.equal(expected.b_0_c, actual.b_0_c);
@@ -184,7 +184,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 'a&b': 'first'
             };
 
-            var actual = new Norm({seperator: '&'}).denormalize(obj);
+            var actual = new DNorm({seperator: '&'}).denormalize(obj);
 
             assert.equal(expected['a&b'], actual['a&b']);
         });
@@ -198,7 +198,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b: 'second'
             };
 
-            var actual = new Norm().normalize(obj);
+            var actual = new DNorm().normalize(obj);
 
             assert.equal(obj.a, actual.a);
             assert.equal(obj.b, actual.b);
@@ -219,7 +219,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 }
             };
 
-            var actual = new Norm().normalize(obj);
+            var actual = new DNorm().normalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b.c, actual.b.c);
@@ -248,7 +248,7 @@ describe('Object Normalizer/Denormalizer', function () {
             };
 
 
-            var actual = new Norm().normalize(obj);
+            var actual = new DNorm().normalize(obj);
 
             assert.equal(expected.a.b, actual.a.b);
             assert.equal(expected.a.c.e, actual.a.c.e);
@@ -272,7 +272,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 ]
             };
 
-            var actual = new Norm().normalize(obj);
+            var actual = new DNorm().normalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b[0], actual.b[0]);
@@ -294,7 +294,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 custom: 'first'
             };
 
-            var actual = new Norm({
+            var actual = new DNorm({
                 mappings: [
                     {
                         from: 'a_b',
@@ -317,7 +317,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 custom: 'first'
             };
 
-            var actual = new Norm({
+            var actual = new DNorm({
                 mappings: [
                     {
                         from: 'a_b',
@@ -349,7 +349,7 @@ describe('Object Normalizer/Denormalizer', function () {
                     }
                 ];
 
-                var actual = new Norm({
+                var actual = new DNorm({
                     useDynamicArrays: true
                 }).denormalize({
                         a: 'first',
@@ -370,7 +370,7 @@ describe('Object Normalizer/Denormalizer', function () {
             });
 
 
-        it('should map arrays of flat objects to normalized objects',
+        it('should map arrays of flat objects to normalized ' + 'objects',
             function () {
                 var expected = {
                     a: 'first',
@@ -381,7 +381,7 @@ describe('Object Normalizer/Denormalizer', function () {
                     ]
                 };
 
-                var actual = new Norm({
+                var actual = new DNorm({
                     useDynamicArrays: true
                 }).normalize([
                         {
@@ -407,83 +407,83 @@ describe('Object Normalizer/Denormalizer', function () {
             });
 
 
-        it('should map arrays of flat objects to normalized objects with multiple levels',
-            function () {
-                var expected = {
-                    a: {
-                        b: 'first'
+        it('should map arrays of flat objects to normalized objects with ' +
+            'multiple levels', function () {
+            var expected = {
+                a: {
+                    b: 'first'
+                },
+                c: [
+                    'array1',
+                    'array2',
+                    'array3'
+                ]
+            };
+
+            var actual = new DNorm({
+                useDynamicArrays: true
+            }).normalize([
+                    {
+                        a_b: 'first',
+                        c: 'array1'
                     },
-                    c: [
-                        'array1',
-                        'array2',
-                        'array3'
-                    ]
-                };
-
-                var actual = new Norm({
-                    useDynamicArrays: true
-                }).normalize([
-                        {
-                            a_b: 'first',
-                            c: 'array1'
-                        },
-                        {
-                            a_b: 'first',
-                            c: 'array2'
-                        },
-                        {
-                            a_b: 'first',
-                            c: 'array3'
-                        }
-                    ]);
-
-                assert.equal(3, actual.c.length);
-                assert.equal(expected.a.b, actual.a.b);
-                assert.equal(expected.c[0], actual.c[0]);
-                assert.equal(expected.c[1], actual.c[1]);
-                assert.equal(expected.c[2], actual.c[2]);
-            });
-
-
-        it('should map arrays of flat objects to normalized objects with multiple levels',
-            function () {
-                var expected = {
-                    a: {
-                        b: 'first'
+                    {
+                        a_b: 'first',
+                        c: 'array2'
                     },
-                    c: [
-                        'array1',
-                        'array2',
-                        'array3'
-                    ]
-                };
+                    {
+                        a_b: 'first',
+                        c: 'array3'
+                    }
+                ]);
 
-                var actual = new Norm({
-                    useDynamicArrays: true
-                }).normalize([
-                        {
-                            a_b: 'first',
-                            c: 'array1'
-                        },
-                        {
-                            a_b: 'first',
-                            c: 'array2'
-                        },
-                        {
-                            a_b: 'first',
-                            c: 'array3'
-                        }
-                    ]);
+            assert.equal(3, actual.c.length);
+            assert.equal(expected.a.b, actual.a.b);
+            assert.equal(expected.c[0], actual.c[0]);
+            assert.equal(expected.c[1], actual.c[1]);
+            assert.equal(expected.c[2], actual.c[2]);
+        });
 
-                assert.equal(expected.a.b, actual.a.b);
-                assert.equal(expected.c[0], actual.c[0]);
-                assert.equal(expected.c[1], actual.c[1]);
-                assert.equal(expected.c[2], actual.c[2]);
-            });
+
+        it('should map arrays of flat objects to normalized objects with ' +
+            'multiple levels', function () {
+            var expected = {
+                a: {
+                    b: 'first'
+                },
+                c: [
+                    'array1',
+                    'array2',
+                    'array3'
+                ]
+            };
+
+            var actual = new DNorm({
+                useDynamicArrays: true
+            }).normalize([
+                    {
+                        a_b: 'first',
+                        c: 'array1'
+                    },
+                    {
+                        a_b: 'first',
+                        c: 'array2'
+                    },
+                    {
+                        a_b: 'first',
+                        c: 'array3'
+                    }
+                ]);
+
+            assert.equal(expected.a.b, actual.a.b);
+            assert.equal(expected.c[0], actual.c[0]);
+            assert.equal(expected.c[1], actual.c[1]);
+            assert.equal(expected.c[2], actual.c[2]);
+        });
 
 
         it('should denormalize deep objects with multiple arrays', function () {
-            var actual = new Norm({useDynamicArrays: true}).denormalize({
+            var actual = new DNorm({useDynamicArrays: true}).denormalize({
                 a: 'top',
                 b: [
                     {
@@ -545,6 +545,5 @@ describe('Object Normalizer/Denormalizer', function () {
                 assert.equal(expected[i].b_d, actual[i].b_d);
             }
         });
-
     });
 });

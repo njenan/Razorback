@@ -214,7 +214,7 @@
         var customToDefaultMappings = {};
         var useDynamicIndex = false;
 
-        var Norm = function (params) {
+        var DNorm = function (params) {
             if (!params) {
                 params = {}
             }
@@ -231,7 +231,7 @@
             seperator = params.seperator ? params.seperator : '_';
         };
 
-        Norm.prototype.denormalize = function (obj) {
+        DNorm.prototype.denormalize = function (obj) {
             var out;
             if (useDynamicIndex) {
                 out = [];
@@ -244,12 +244,12 @@
             return out;
         };
 
-        Norm.prototype.normalize = function (obj) {
+        DNorm.prototype.normalize = function (obj) {
             applyCustomMappingsToFlatObject(obj, customToDefaultMappings);
             return unflatten(obj);
         };
 
-        module.exports = Norm;
+        module.exports = DNorm;
 
     }
     ()
