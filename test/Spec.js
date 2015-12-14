@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var DNorm = require('../index');
+var Razorback = require('../index');
 
 
 describe('Object Normalizer/Denormalizer', function () {
@@ -12,7 +12,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b: 'second'
             };
 
-            var actual = new DNorm().denormalize(obj);
+            var actual = new Razorback().denormalize(obj);
 
             assert.equal(obj.a, actual.a);
             assert.equal(obj.b, actual.b);
@@ -33,7 +33,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_c2: 'third'
             };
 
-            var actual = new DNorm().denormalize(obj);
+            var actual = new Razorback().denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_c1, actual.b_c1);
@@ -62,7 +62,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_c3: 'fourth'
             };
 
-            var actual = new DNorm().denormalize(obj);
+            var actual = new Razorback().denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_c1, actual.b_c1);
@@ -88,7 +88,7 @@ describe('Object Normalizer/Denormalizer', function () {
                     b_2: '3'
                 };
 
-                var actual = new DNorm().denormalize(obj);
+                var actual = new Razorback().denormalize(obj);
 
                 assert.equal(expected.a, actual.a);
                 assert.equal(expected.b_0, actual.b_0);
@@ -119,7 +119,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b_1_d: 'fifth'
             };
 
-            var actual = new DNorm().denormalize(obj);
+            var actual = new Razorback().denormalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b_0_c, actual.b_0_c);
@@ -161,7 +161,7 @@ describe('Object Normalizer/Denormalizer', function () {
                     b_1_d_1: 'seventh'
                 };
 
-                var actual = new DNorm().denormalize(obj);
+                var actual = new Razorback().denormalize(obj);
 
                 assert.equal(expected.a, actual.a);
                 assert.equal(expected.b_0_c, actual.b_0_c);
@@ -184,7 +184,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 'a&b': 'first'
             };
 
-            var actual = new DNorm({seperator: '&'}).denormalize(obj);
+            var actual = new Razorback({seperator: '&'}).denormalize(obj);
 
             assert.equal(expected['a&b'], actual['a&b']);
         });
@@ -198,7 +198,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 b: 'second'
             };
 
-            var actual = new DNorm().normalize(obj);
+            var actual = new Razorback().normalize(obj);
 
             assert.equal(obj.a, actual.a);
             assert.equal(obj.b, actual.b);
@@ -219,7 +219,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 }
             };
 
-            var actual = new DNorm().normalize(obj);
+            var actual = new Razorback().normalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b.c, actual.b.c);
@@ -248,7 +248,7 @@ describe('Object Normalizer/Denormalizer', function () {
             };
 
 
-            var actual = new DNorm().normalize(obj);
+            var actual = new Razorback().normalize(obj);
 
             assert.equal(expected.a.b, actual.a.b);
             assert.equal(expected.a.c.e, actual.a.c.e);
@@ -272,7 +272,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 ]
             };
 
-            var actual = new DNorm().normalize(obj);
+            var actual = new Razorback().normalize(obj);
 
             assert.equal(expected.a, actual.a);
             assert.equal(expected.b[0], actual.b[0]);
@@ -294,7 +294,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 custom: 'first'
             };
 
-            var actual = new DNorm({
+            var actual = new Razorback({
                 mappings: [
                     {
                         from: 'a_b',
@@ -317,7 +317,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 custom: 'first'
             };
 
-            var actual = new DNorm({
+            var actual = new Razorback({
                 mappings: [
                     {
                         from: 'a_b',
@@ -349,7 +349,7 @@ describe('Object Normalizer/Denormalizer', function () {
                     }
                 ];
 
-                var actual = new DNorm({
+                var actual = new Razorback({
                     useDynamicArrays: true
                 }).denormalize({
                         a: 'first',
@@ -381,7 +381,7 @@ describe('Object Normalizer/Denormalizer', function () {
                     ]
                 };
 
-                var actual = new DNorm({
+                var actual = new Razorback({
                     useDynamicArrays: true
                 }).normalize([
                         {
@@ -420,7 +420,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 ]
             };
 
-            var actual = new DNorm({
+            var actual = new Razorback({
                 useDynamicArrays: true
             }).normalize([
                     {
@@ -458,7 +458,7 @@ describe('Object Normalizer/Denormalizer', function () {
                 ]
             };
 
-            var actual = new DNorm({
+            var actual = new Razorback({
                 useDynamicArrays: true
             }).normalize([
                     {
@@ -483,7 +483,7 @@ describe('Object Normalizer/Denormalizer', function () {
 
 
         it('should denormalize deep objects with multiple arrays', function () {
-            var actual = new DNorm({useDynamicArrays: true}).denormalize({
+            var actual = new Razorback({useDynamicArrays: true}).denormalize({
                 a: 'top',
                 b: [
                     {
