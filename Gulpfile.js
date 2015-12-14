@@ -4,8 +4,10 @@ var gulp = require('gulp'),
 
 
 gulp.task('coverage', function () {
-    gulp.src('index.js')
-        .pipe(istanbul())
+    gulp.src(['lib/index.js'])
+        .pipe(istanbul({
+            includeUntested: true
+        }))
         .pipe(istanbul.hookRequire())
         .pipe(gulp.dest('coverage'));
 });
