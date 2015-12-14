@@ -1,4 +1,5 @@
 # D'Norm
+## /dɪˈnɔrm/
 ### A js library for normalization/denormalization of objects.
 
 D'Norm is designed to allow easier denormalization of objects prior to persisting in flat sql tables, as well as normalizing the objects upon retrieval.
