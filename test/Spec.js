@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var Razorback = require('../lib/index');
+var Razorback = require('../index');
 
 
 describe('Razorback', function () {
