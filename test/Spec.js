@@ -369,7 +369,7 @@ describe('Razorback', function () {
             });
 
 
-        it('should map arrays of flat objects to normalized ' + 'objects',
+        it('should map arrays of flat objects to normalized objects',
             function () {
                 var expected = {
                     a: 'first',
@@ -543,6 +543,26 @@ describe('Razorback', function () {
                 assert.equal(expected[i].b_c, actual[i].b_c);
                 assert.equal(expected[i].b_d, actual[i].b_d);
             }
+        });
+
+        it('should handle objects without arrays', function () {
+            var actual = new Razorback({useDynamicArrays: true}).denormalize({
+                a: {
+                    b: 'first',
+                    c: 'second'
+                }
+            });
+
+            var expected = [
+                {
+                    a_b: 'first',
+                    a_c: 'second'
+                }
+            ];
+
+            assert.equal(1, actual.length);
+            assert.equal(expected[0].a_b, actual[0].a_b);
+            assert.equal(expected[0].a_c, actual[0].a_c);
         });
     });
 });

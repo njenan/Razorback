@@ -157,28 +157,26 @@
             var current = source[key];
 
             if (isArray(current)) {
+                var isDeep = false;
+                var element = current.shift();
+
+                if (isObject(element)) {
+                    wasPopped = iterateThroughKeys(element, out,
+                        currentPath);
+                    isDeep = wasPopped;
+                } else {
+                    out[currentPath] = element;
+                }
+
                 if (current.length > 0) {
-                    var isDeep = false;
-                    var element = current.shift();
+                    wasPopped = true;
+                }
 
-                    if (isObject(element)) {
-                        wasPopped = iterateThroughKeys(element, out,
-                            currentPath);
-                        isDeep = wasPopped;
-                    } else {
-                        out[currentPath] = element;
-                    }
-
-                    if (current.length > 0) {
-                        wasPopped = true;
-                    }
-
-                    if (isDeep) {
-                        current.unshift(element);
-                    }
+                if (isDeep) {
+                    current.unshift(element);
                 }
             } else if (isObject(current)) {
-                wasPopped = iterateThroughKeys(current, currentPath);
+                wasPopped = iterateThroughKeys(current, out, currentPath);
             } else {
                 out[currentPath] = current;
             }
