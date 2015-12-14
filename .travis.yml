@@ -1,12 +1,16 @@
 language: node_js
 node_js:
-  - "4.1"
-  - "4.0"
-  - "0.12"
-  - "0.11"
-  - "0.10"
-  - "iojs"
+- '4.1'
+- '4.0'
+- '0.12'
+- '0.11'
+- '0.10'
+- iojs
 deploy:
-  - provider: npm
-  - email: $email
-  - password: $password
+- provider: npm
+- email: $EMAIL
+- password: $PASSWORD
+env:
+  global:
+  - secure: jw9HNe3WbqMs0tPTSmbj1Oo+REmTkeQVH+JdC/wZbMJ2WFusGk20huHZRcq/cA+rbyQjz3+kd4x4YFTzVCGVwAdh+hWCYCk11boC1yq1gtoyuCuUmXQpv/f6X7/lYWyTbvZmb2EtdHipzRDAfSWHB5nEvL/7a0wBRtDxU3M9LI4lq8gDAc5kVUh1JNMLUZXQUAQTUopdzmimZQ9SCdPjCAa3Cka/eKlAnCQ9+rvWZCVrv9egUrwsK0ks3BZ4wS41RWcrl8XTMVD31dSfip9iVFegjO5Z5s31zJMUb95mUbx+w1TbgcRFuOluNDkENVJ9ABZyhDsyQ7IQJI7yJuYQbC+i52K1+d/sM5AsXkKTiNG7vN2r36lc8cR9d2f3nfrPqX3IUZhHnsZh0zLiar4J2qfbmXidV9WRLiNXQun0k0x+eNhHcEYQVy4NUzcZ6/nVV/ulfE4gYKZjLEAgPU0QQakenG0eIxYYq8YJJnCrlovLXrbRWRYxEjPE/p4oXbzMpuyA3h6+cdktjttciqflPE4Za8LWBiMMGUJjZ23nYOkDAj+CbApckX9MA+waHLUdni7OX2kJqYg0BA7GSHtsrvsNSc43rH8FTw6H5FEYOSRASlstuwYVJ1aF2F9j11zm+FD6nIjuYL3keS+KW2OkAK3lW53eBGT2JSekYhpb57U=
+  - secure: LkzkpAawFsFrfZKBPvPcxnzqWaI0E/zf8KXTpOtSqAsBwx/8XBsdKQ/bE5095xPgKS2hz//m7+oEYdyVVRjZYcv94KshAXQCVy9TGxGQxOoaE4K0TTCuI/LYQH6Dx3gkwY8oji8c4LHsdPD06Dq6FkbkRLXfSvghuSvZq35mAxMVcqKa+tVWe/INYl0qbZZhZ/gpyRr+vmzYn52dNl6LID4wUjAvo6kFZqPunB2CkDIz86KXKgJHloSbQg9lAMSB2/S6tQRhXbDdCaJfGhNuyKblXD6fJvdM1FLd3U1ZNNO9vMAHjnUPNk4NdjvAaUVk5bEkJcC7EqFBtnkmYPUibeGoOAIuCvMqjxLzQ/dbyRjCdxG8aks5ceuw2Xfc0JeNw1zRpBgu7byg8kYOSompCO0J8axVU5VvijrBerEWIWMaiYg5X4SW1OVHfZjEJb+588cN7lqCT/i2B5qG6LTOgzPMh2ziKhMbhgV/eF7vSjjQ3+Dp1NJsNsOEXFrgwj/LtDNqnSfzW2sABND30lmNcKay+kNVAD93D+kDPZf0Fq+N/WCq2yfNB44e3QJnPiZytaimNCtCNnfyktyJpupol+xvbPBFWxV5LplS4ZdkOpsYX3aL0/WbYmbua7x5IYmaErWSjHCZhKFL1kO+Mrbcf6ueFYdIFUOVOuOjZxbQuuI=
