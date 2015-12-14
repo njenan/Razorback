@@ -13,7 +13,8 @@ deploy:
   on:
     repo: njenan/Razorback
 after_deploy:
-- git push --repo https://${USERNAME}:${PASSWORD}@github.org/njenan/razorback.git
+- GIT_URL = https://${USERNAME}:${PASSWORD}@github.org/njenan/razorback.git
+- git push --repo GIT_URL
 env:
   global:
   - secure: QEu6VRIhgXbs7bcFnEPU5Tm/LgRwK60W5e7hhn5k8HsnkyOytD7nvgD1H0WcPLA5WxwmYjkP7OCbznhn8EG7/QRA+ZU9b0olNsdDls7qBGyM9CCYNhknN7hbomM0AS9yaxLJ6dPscT9z/MNS+A+AoLQaKdERmV1hfEcvegUXqEq6rfolPyEeehNV3t0eJNBL8x+Jw4tLCplKuT521QmZ1aEgGwmVChEeNzLAxG3gAxEuTjFQUycE62rkEvRDsXMzxrS8c/Hka/7W07dfjLUaI7gpqNoKEKwdH2oGGTTTgAxYfNjggsXy5Ep2Ui+6N2TxDue6izz9Aud9K3R8P7qoAJ3HmjI0QBP8KqrH5Jh1QRnZqrsNno56GfKlikTbwskDY/OtY+tW9nLUF23f+mLjmlIABzzWJcP9NuhhF+6NhdGJ65j3mQeP3Or60RJCAWT3b0hvuzOT2CSqsWz+0g8s5c2ap5FuqyOVgvQtAO28AnPU8ukYocE/dxpp++IY7l3Nk/rv7AS1HAdGbvVSVp0Jxtub6+PrB3A3v2n/mG7FknCyxWzI8OOmq9SrXHA8qNsDeW7D1FmPXlmNp2Vzv7iIi+5LODuA1t53G5w+rFBQgifdyF6HF6GWEd/hN0G2jZ/zKOA6Qt3SywoY8Z1HJo6VSJ9nYfjs5kB1mGb3z6LJoVM=
