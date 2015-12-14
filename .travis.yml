@@ -5,7 +5,8 @@ before_deploy:
 - git config user.email "njenan@gmail.com"
 - git config user.name "Travis CI"
 - NPM_VERSION="0.0.${TRAVIS_BUILD_NUMBER}"
-- npm version NPM_VERSION
+- echo $NPM_VERSION
+- npm version $NPM_VERSION
 deploy:
   provider: npm
   email: njenan@gmail.com
