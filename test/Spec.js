@@ -3,9 +3,9 @@ var assert = require('assert');
 var Razorback = require('../index');
 
 
-describe('Object Normalizer/Denormalizer', function () {
+describe('Razorback', function () {
 
-    describe('denormalize', function () {
+    describe('denormalize feature', function () {
         it('should collapse a simple object to itself', function () {
             var obj = {
                 a: 'first',
@@ -191,7 +191,7 @@ describe('Object Normalizer/Denormalizer', function () {
 
     });
 
-    describe('normalize', function () {
+    describe('normalize feature', function () {
         it('should transform a flat object into itself', function () {
             var obj = {
                 a: 'first',
@@ -331,7 +331,6 @@ describe('Object Normalizer/Denormalizer', function () {
     });
 
     describe('advanced array mappings', function () {
-
         it('should map objects with arrays to arrays of flat objects',
             function () {
                 var expected = [
