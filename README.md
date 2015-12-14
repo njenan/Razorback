@@ -24,7 +24,7 @@ Razorback is designed to allow easier denormalization of objects prior to persis
 	//}
 	
 
-Currently, only fixed index arrays (those that always have a set number of items) are supported.
+Razorback supports fixed index arrays, where numbered indexes store arrays:
 
 	var razorback = new Razorback();
 	
@@ -46,6 +46,52 @@ Currently, only fixed index arrays (those that always have a set number of items
 	//	b_1: 'third'
 	//}
 	
+Or dynamic indexes, where arrays are represented by arrays of flat objects:
+
+	var actual = new Razorback({useDynamicArrays: true})
+		.denormalize({
+			a: 'top',
+            b: [
+            	{
+                	c: 'alpha',
+                    d: [
+                    	'first',
+                        'second'
+                    ]
+                }, {
+                	c: 'beta',
+                    d: [
+                    	'fourth',
+                        'fifth'
+                    ]
+                }
+            ]
+        });
+        
+    //produces:
+    
+    //[
+    //	{
+    //  	a: 'top',
+    //      b_c: 'alpha',
+    //      b_d: 'first'
+    //   },
+    //	 {
+    //   	a: 'top',
+    //      b_c: 'alpha',
+    //      b_d: 'second'
+    //   },
+    //   {
+    //      a: 'top',
+    //      b_c: 'beta',
+    //      b_d: 'fourth'
+    //   },
+    //   {
+    //      a: 'top',
+    //      b_c: 'beta',
+    //      b_d: 'fifth'
+    //   }
+    //];
 
 Custom seperators can be used instead of the default underscore '_' character if this conflicts with existing field names on objects.
 
