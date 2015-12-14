@@ -2,13 +2,13 @@ language: node_js
 node_js:
 - '4.1'
 before_deploy:
-  - git config user.email "njenan@gmail.com"
-  - git config user.name "Travis CI"
-  - npm version patch
+- git config user.email "njenan@gmail.com"
+- git config user.name "Travis CI"
+- npm version patch
 deploy:
-  provider: npm
-  email: njenan@gmail.com
+  provider: releases
   api_key:
-    secure: fMyXcwfVnmJzZL3Q9Yw17mgpQX1MCTNEzLkwJ4GTDGXz2IEWsGpDagXstkvjj8XSNUBoeHQZ3SDLx6L1DQ+ii6IgFR8vxe6C17fuYikLM+RX90VU5lxKmubyIlqnqM83eqIxHC+uics/TAPJdcGwZ5gptpUBHzDH58oU9B7GdM4pYFKGhqGQxsGvR57Tp3xEs97+NBa2uUwHxsk48m5zp8hdxy+Th4EsYHELwi6jLJHWEGcrHaAmA+mguxJmGeg10WQAsZm29awEmHiufMlN6x18wDjcKAFRnH/p3rsb+p7XcaUQ1IqUqiFk8jNNSNQm4XEOJ1ChFwLCdlmoB/JpOOjN8ytUyB6TRL3/MsC86hQV9U6z1E7Hx79mRXq2p0xucQMCb972KMnsJDzZkXf0v6d/eGkQY+FK/8t9+EbLBN5Amn9X9KcCsvXB6TTJJ+8RCfqSrNOYCDNuq0cDQQVCwQJ8hxd8gkuk+1tUOUUsV+0o7TzoMSQK9HfF2/BrVaMV9TDPoPhlnq7ndBOVcdXLXfZF5fASwR8VMCMUB0O5tYy45fSGgiocfmssm7VNQzEppeGTifII2dSKFbOjzgZZZHs+AqMYA/AKd/wIV659vtWl84J7nzcAp1yvHa0s6ExoDSJO+WGOuGYVva5r2D57mKCjDu5FIe86f3bisYkRoRA=
+    secure: bB18rdp7YFGn+6c4RU8+ISJIjxlX0/yUsYuyslM6QUZq9eBRSR0l/1JfjLby407+oaEKPCsCRHWdX3hKyhC33BnMPPx1AmDsC2kzqbCG4/StaSGC3PtONNRMm5bVeNtpBNP1HA3xaFrNtT7PYfD6N9iJlz+f327u/80Tr0QynTM+cr8Az5X7mUV+X797GsqXmB1sTJpC1MYdQrvcy5QCydd6eVvuN6P76lJ1UDpF9qw26FDjbl1aeIb4cUCD/oF3U+hWaXZgOGXDGpDLr+AcFZpy5W3T23nUTKXpdv4H0iBStPmNE58TxrqsyODaRxWXD31eJr44Spj1LDWd3tkn9bAMut5DVqTnzDeDySrtjCJSih3/o6erTnHyp1/Rx91nVuHiacCyurgkIL2wg1JHR9oHHLx5/DSJfRZiMDSr8nu5pYOGKxXmlrBEi4eg8+gSPvwgqKcO6cSNs6G+sJA0pgJIAM3MppjrDmMNW+t6ugwvvNHimK/9aIMxWv9cPsKXZfxERXw+OAJIkNn/Q7R7MhNxvMaPHQLPdTpNI31T3rEeV/VJGa2JrwzXpwJAVfmnD6M6mJhNa/tqSOFh4QpmdqvL+VBAa8iVBH854nRxzWDc8u7S1v45tjxCCpOEZ8JxE+uK1iNcpyak79GIKKF4RJsWRPOLpEp1xfkkH/kBA00=
+  file: package.json
   on:
     repo: njenan/Razorback
