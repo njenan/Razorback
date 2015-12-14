@@ -1,7 +1,11 @@
 language: node_js
 node_js:
 - '4.1'
-before_deploy: npm version patch
+before_deploy:
+  - git config user.email "njenan@gmail.com"
+  - git config user.name "Travis CI"
+  - npm version patch
+  - git push
 deploy:
   provider: npm
   email: njenan@gmail.com
