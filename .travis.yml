@@ -8,5 +8,5 @@ node_js:
   - "iojs"
 deploy:
   - provider: npm
-  - email: email
-  - password: password
+  - email: $email
+  - password: $password
