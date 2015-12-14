@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="TypeScriptCompiler">
+    <option name="typeScriptCompilerParams" value="--sourcemap --module commonjs" />
+    <option name="mainFilePath" value="$PROJECT_DIR$/../bring-it-web/app.ts" />
+    <option name="useMainFile" value="true" />
+  </component>
+</project>
