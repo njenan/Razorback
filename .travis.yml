@@ -13,7 +13,7 @@ deploy:
   on:
     repo: njenan/Razorback
 after_deploy:
-- GIT_URL = "https://${USERNAME}:${PASSWORD}@github.org/njenan/razorback.git"
+- GIT_URL="https://${USERNAME}:${PASSWORD}@github.org/njenan/razorback.git"
 - echo $GIT_URL
 - git push --repo $GIT_URL
 env:
