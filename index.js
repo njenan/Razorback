@@ -1,8 +1,8 @@
 (function () {
-    var Functions = require('./Functions'),
+    var Functions = require('./lib/Functions'),
         fieldmap = Functions.fieldmap,
-        DynamicIndexMapper = require('./mappers/DynamicIndexMapper'),
-        FixedIndexMapper = require('./mappers/FixedIndexMapper');
+        DynamicIndexMapper = require('./lib/mappers/DynamicIndexMapper'),
+        FixedIndexMapper = require('./lib/mappers/FixedIndexMapper');
 
 
     var Razorback = function (params) {
