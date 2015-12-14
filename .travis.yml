@@ -5,7 +5,6 @@ before_deploy:
   - git config user.email "njenan@gmail.com"
   - git config user.name "Travis CI"
   - npm version patch
-  - git push
 deploy:
   provider: npm
   email: njenan@gmail.com
