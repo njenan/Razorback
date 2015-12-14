@@ -1,5 +1,5 @@
 {
-  "name": "dnorm",
+  "name": "razorback",
   "version": "0.0.1",
   "description": "A library for normalization & denormalization of js objects",
   "main": "index.js",

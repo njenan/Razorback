@@ -1,12 +1,11 @@
-# D'Norm
-## /dɪˈnɔrm/
+# Razorback
 ### A js library for normalization/denormalization of objects.
 
 [![Build Status](https://travis-ci.org/njenan/NormalizeDenormalize.svg?branch=master)](https://travis-ci.org/njenan/NormalizeDenormalize)
 
-D'Norm is designed to allow easier denormalization of objects prior to persisting in flat sql tables, as well as normalizing the objects upon retrieval.
+Razorback is designed to allow easier denormalization of objects prior to persisting in flat sql tables, as well as normalizing the objects upon retrieval.
 
-	var dnorm = new DNorm();
+	var razorback = new Razorback();
 	
 	var obj = {
 		a: 'first',
@@ -15,7 +14,7 @@ D'Norm is designed to allow easier denormalization of objects prior to persistin
 		}
 	};
 	
-	dnorm.denormalize(obj);
+	razorback.denormalize(obj);
 	
 	//produces:
 	//
@@ -27,7 +26,7 @@ D'Norm is designed to allow easier denormalization of objects prior to persistin
 
 Currently, only fixed index arrays (those that always have a set number of items) are supported.
 
-	var dnorm = new DNorm();
+	var razorback = new Razorback();
 	
 	var obj = {
 		a: 'first',
@@ -37,7 +36,7 @@ Currently, only fixed index arrays (those that always have a set number of items
 		]
 	};
 	
-	dnorm.denormalize(obj);
+	razorback.denormalize(obj);
 	
 	//produces:
 	//
@@ -50,11 +49,11 @@ Currently, only fixed index arrays (those that always have a set number of items
 
 Custom seperators can be used instead of the default underscore '_' character if this conflicts with existing field names on objects.
 
-	var dnorm = new DNorm({
+	var razorback = new Razorback({
 		seperator : '&'
 		});
 		
-	dnorm.denormalize({
+	razorback.denormalize({
 		a: 'first',
 		b: {
 			c: 'second',
@@ -73,7 +72,7 @@ Custom seperators can be used instead of the default underscore '_' character if
 	
 Custom mappings between the default (ugly) fields that norm generates can also be provided.
 
-	var dnorm = new DNorm({
+	var razorback = new Razorback({
 		mappings: [
 			{
 				from: 'a_b',
@@ -82,7 +81,7 @@ Custom mappings between the default (ugly) fields that norm generates can also b
 		]
 	});
 	
-	dnorm.denormalize({
+	razorback.denormalize({
 		a: {
 			b: 'first'
 		}
