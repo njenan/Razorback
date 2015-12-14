@@ -1,6 +1,7 @@
 language: node_js
 node_js:
 - '4.1'
+before_deploy: npm version patch
 deploy:
   provider: npm
   email: njenan@gmail.com
