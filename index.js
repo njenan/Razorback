@@ -11,7 +11,7 @@
         var customToDefaultMappings = {};
         var mappers;
         var mapperType;
-
+        var exclusions;
 
         function applyCustomMappingsToFlatObject(obj, mappings) {
             fieldmap(function (source, k) {
@@ -35,6 +35,10 @@
             });
         }
 
+        if (params.exclusions) {
+            exclusions = params.exclusions;
+        }
+
         mapperType = params.useMapper ? params.useMapper : 'dynamicIndex';
 
         if (params.seperator) {
@@ -44,7 +48,7 @@
         }
 
         mappers = {
-            dynamicIndex: new DynamicIndexMapper(seperator),
+            dynamicIndex: new DynamicIndexMapper(seperator, exclusions),
             fixedIndex: new FixedIndexMapper(seperator)
         };
 

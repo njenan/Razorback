@@ -139,3 +139,33 @@ Custom mappings between the default (ugly) fields that norm generates can also b
 	//{
 	//	customField: 'first'
 	//}
+
+Razorback also supports excluding certain arrays from being flattened.
+
+	var razorback = new Razorback({
+    		exclusions: [
+    			'b.c'
+    		]
+    	});
+    	
+    	razorback.denormalize({
+    		a: 'first',
+    		b: {
+    			c: [
+    				'second',
+    				'third'
+    			]
+    		}
+    	});
+    	
+    	//produces:
+    	//
+    	//[
+    	//	{
+    	//		a: 'first',
+    	//		b_c: [
+    	//			'second',
+    	//			'third'
+    	//		]
+    	//	}
+    	//]

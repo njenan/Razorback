@@ -589,4 +589,50 @@ describe('Razorback', function () {
             assert.equal(expected[0].a_c, actual[0].a_c);
         });
     });
+
+    describe('Exclusions', function () {
+        it('should allow specific arrays to be excluded from dynamic index mapping',
+            function () {
+                var actual = new Razorback({
+                    exclusions: [
+                        'b'
+                    ]
+                }).denormalize({
+                        a: [
+                            'first',
+                            'second'
+                        ],
+                        b: [
+                            'third',
+                            'fourth'
+                        ]
+                    });
+
+                var expected = [
+                    {
+                        a: 'first',
+                        b: [
+                            'third',
+                            'fourth'
+                        ]
+                    },
+                    {
+                        a: 'second',
+                        b: [
+                            'third',
+                            'fourth'
+                        ]
+                    }
+                ];
+
+                assert.equal(expected[0].a, actual[0].a);
+                assert.equal(expected[1].a, actual[1].a);
+
+                assert.equal(expected[0].b[0], actual[0].b[0]);
+                assert.equal(expected[0].b[1], actual[0].b[1]);
+
+                assert.equal(expected[1].b[0], actual[1].b[0]);
+                assert.equal(expected[1].b[1], actual[1].b[1]);
+            });
+    });
 });
